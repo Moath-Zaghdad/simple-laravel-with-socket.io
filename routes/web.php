@@ -31,7 +31,6 @@ Route::get('/', function () {
     ];
     Redis::publish('test-channel', json_encode($data));
 
-    return 'Done';
     return view('welcome');
 });
 

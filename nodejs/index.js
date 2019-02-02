@@ -14,6 +14,8 @@ const redisClient = redis.createClient({
 redisClient.on('message', (channel, message) => {
     message = JSON.parse(message);
     console.log('Message recevied: ', message);
+
+    io.emit(channel + ':' + message.event, message.data);
 });
 
 

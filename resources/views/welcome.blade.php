@@ -81,18 +81,23 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Open a new browser tab with the same URL
+                    <ul id="messages"></ul>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io('http://127.0.0.1:3030');
+
+        socket.on('test-channel:UserSignedUp', function(ms){
+            console.log(ms);
+          $('#messages').append($('<li>').text(ms.username));
+        });
+
+      });
+    </script>
+</body>
 </html>
