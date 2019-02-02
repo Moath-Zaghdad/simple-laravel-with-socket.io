@@ -92,7 +92,7 @@
       $(function () {
         var socket = io('http://127.0.0.1:3030');
 
-        socket.on('test-channel:UserSignedUp', function(ms){
+        socket.on('presence-test-channel:App\\Events\\UserSignedUp', function(ms){
             console.log(ms);
           $('#messages').append($('<li>').text(ms.username));
         });

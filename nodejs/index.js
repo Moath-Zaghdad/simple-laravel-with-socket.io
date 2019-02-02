@@ -19,7 +19,7 @@ redisClient.on('message', (channel, message) => {
 });
 
 
-redisClient.subscribe('test-channel', () => {
+redisClient.subscribe('presence-test-channel', () => {
     console.log('Redis: test-channel subscribed');
 });
 Server.listen(3030);

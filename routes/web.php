@@ -11,7 +11,7 @@
 |
 */
 use Illuminate\Support\Facades\Redis;
-
+use App\Events\UserSignedUp;
 Route::get('/', function () {
     // Redis::set('name', 'Moath');
     // return Redis::get('name');
@@ -23,13 +23,14 @@ Route::get('/', function () {
     // session(['key' => 'default']);
     // return session('key');
 
-    $data = [
-        'event' => 'UserSignedUp',
-        'data' => [
-            'username' => 'Moath'
-        ]
-    ];
-    Redis::publish('test-channel', json_encode($data));
+    // $data = [
+    //     'event' => 'UserSignedUp',
+    //     'data' => [
+    //         'username' => 'Moath'
+    //     ]
+    // ];
+    // Redis::publish('test-channel', json_encode($data));
+    event(new UserSignedUp('Moath'));
 
     return view('welcome');
 });
