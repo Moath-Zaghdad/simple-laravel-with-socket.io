@@ -13,14 +13,26 @@
 use Illuminate\Support\Facades\Redis;
 
 Route::get('/', function () {
-    Redis::set('name', 'Moath');
+    // Redis::set('name', 'Moath');
     // return Redis::get('name');
 
     // Cache::put('foo', 'bar', 10);
     // Cache::store('redis')->put('bar', 'baz', 10);
-    return Redis::get('name');
+    // return Redis::get('name');
     
-    // return view('welcome');
+    // session(['key' => 'default']);
+    // return session('key');
+
+    $data = [
+        'event' => 'UserSignedUp',
+        'data' => [
+            'username' => 'Moath'
+        ]
+    ];
+    Redis::publish('test-channel', json_encode($data));
+
+    return 'Done';
+    return view('welcome');
 });
 
 Auth::routes();

@@ -1,11 +1,23 @@
-const express = require('express');
+var Server = require('http').Server();
 
-var app = express();
+var io = require('socket.io')(Server);
+const redis = require('redis');
 
 
-app.get('/', (req, res) => {
-    res.send('Hi');
+const redisClient = redis.createClient({
+    host: process.env.redis,
+    port: 6379,
+    retry_strategy: () => 1000
 });
 
 
-app.listen(3000, () => console.log(`listening on 3000`));
+redisClient.on('message', (channel, message) => {
+    message = JSON.parse(message);
+    console.log('Message recevied: ', message);
+});
+
+
+redisClient.subscribe('test-channel', () => {
+    console.log('Redis: test-channel subscribed');
+});
+Server.listen(3030);
